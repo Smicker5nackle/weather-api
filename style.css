@@ -1,0 +1,109 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#0a0e1a;--glass-bg:rgba(255,255,255,0.06);--glass-border:rgba(255,255,255,0.1);
+  --glass-hover:rgba(255,255,255,0.12);--text-primary:#f0f0f5;--text-secondary:rgba(240,240,245,0.6);
+  --accent-blue:#5b8def;--accent-purple:#a855f7;--accent-cyan:#22d3ee;
+  --accent-gradient:linear-gradient(135deg,#5b8def,#a855f7);
+  --shadow-glow:0 0 40px rgba(91,141,239,0.15);
+  --radius-sm:12px;--radius-md:20px;--radius-lg:28px;
+  --transition:0.3s cubic-bezier(0.4,0,0.2,1);
+}
+html{font-size:16px}
+body{font-family:'Outfit',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;position:relative}
+
+.aurora-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora-blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.4;animation:float 12s ease-in-out infinite}
+.blob-1{width:500px;height:500px;background:var(--accent-blue);top:-10%;left:-5%}
+.blob-2{width:400px;height:400px;background:var(--accent-purple);top:40%;right:-10%;animation-delay:-4s}
+.blob-3{width:350px;height:350px;background:var(--accent-cyan);bottom:-10%;left:30%;animation-delay:-8s}
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(30px,-40px) scale(1.05)}
+  50%{transform:translate(-20px,20px) scale(0.95)}
+  75%{transform:translate(40px,30px) scale(1.03)}
+}
+
+.app-container{position:relative;z-index:1;width:100%;max-width:560px;padding:40px 20px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+.search-section{width:100%;text-align:center;animation:fadeUp 0.8s ease-out}
+.app-title{font-size:2.5rem;font-weight:700;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:12px}
+.title-icon{-webkit-text-fill-color:initial;font-size:2.2rem;animation:bobble 3s ease-in-out infinite}
+@keyframes bobble{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.app-subtitle{color:var(--text-secondary);font-size:1.05rem;font-weight:300;margin-bottom:36px;letter-spacing:0.3px}
+
+.search-box{width:100%;display:flex;flex-direction:column;gap:14px}
+.search-input-wrapper{display:flex;align-items:center;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--radius-md);padding:6px 8px 6px 18px;transition:var(--transition);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.search-input-wrapper:focus-within{border-color:var(--accent-blue);box-shadow:0 0 0 3px rgba(91,141,239,0.15),var(--shadow-glow)}
+.search-icon{width:20px;height:20px;color:var(--text-secondary);flex-shrink:0}
+#location-input{flex:1;background:none;border:none;outline:none;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:1rem;padding:14px 12px;letter-spacing:0.2px}
+#location-input::placeholder{color:var(--text-secondary);font-weight:300}
+
+.gps-btn{width:44px;height:44px;border-radius:var(--radius-sm);border:none;background:var(--glass-bg);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0}
+.gps-btn svg{width:20px;height:20px}
+.gps-btn:hover{background:var(--glass-hover);color:var(--accent-cyan);transform:scale(1.05)}
+
+.search-btn{width:100%;padding:16px;border:none;border-radius:var(--radius-md);background:var(--accent-gradient);color:#fff;font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:var(--transition);letter-spacing:0.4px}
+.search-btn svg{width:18px;height:18px;transition:transform 0.3s ease}
+.search-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(91,141,239,0.35)}
+.search-btn:hover svg{transform:translateX(4px)}
+.search-btn:active{transform:translateY(0)}
+
+.error-msg{margin-top:16px;color:#f87171;font-size:0.9rem;font-weight:400;min-height:24px;transition:var(--transition)}
+
+.loader-container{display:flex;flex-direction:column;align-items:center;gap:20px;padding:60px 0}
+.loader-ring{width:48px;height:48px;border-radius:50%;border:3px solid var(--glass-border);border-top-color:var(--accent-blue);animation:spin 0.9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-text{color:var(--text-secondary);font-size:0.95rem;font-weight:300}
+
+.weather-card{width:100%;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:32px 28px;backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);animation:fadeUp 0.6s ease-out;box-shadow:var(--shadow-glow)}
+.back-btn{display:flex;align-items:center;gap:6px;background:none;border:1px solid var(--glass-border);color:var(--text-secondary);font-family:'Outfit',sans-serif;font-size:0.85rem;padding:8px 16px;border-radius:50px;cursor:pointer;transition:var(--transition);margin-bottom:24px}
+.back-btn svg{width:16px;height:16px}
+.back-btn:hover{background:var(--glass-hover);color:var(--text-primary);border-color:var(--accent-blue)}
+
+.weather-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.location-info{text-align:left}
+.city-name{font-size:1.8rem;font-weight:700;letter-spacing:-0.5px;line-height:1.2}
+.region-country{color:var(--text-secondary);font-size:0.9rem;margin-top:4px;font-weight:300}
+.local-time{color:var(--accent-cyan);font-size:0.85rem;margin-top:6px;font-weight:400}
+.weather-icon-wrap{text-align:center;flex-shrink:0}
+.weather-icon{width:80px;height:80px;filter:drop-shadow(0 4px 12px rgba(91,141,239,0.3));animation:iconFloat 4s ease-in-out infinite}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.condition-text{font-size:0.85rem;color:var(--text-secondary);margin-top:4px;font-weight:400}
+
+.temp-display{text-align:center;margin:20px 0 4px}
+.temp-value{font-size:5.5rem;font-weight:700;background:linear-gradient(180deg,var(--text-primary) 30%,var(--text-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;letter-spacing:-3px}
+.temp-unit{font-size:2rem;font-weight:300;color:var(--text-secondary);vertical-align:super}
+.feels-like{text-align:center;color:var(--text-secondary);font-size:0.9rem;font-weight:300;margin-bottom:28px}
+
+.details-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.detail-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:16px;display:flex;align-items:center;gap:12px;transition:var(--transition)}
+.detail-card:hover{background:var(--glass-hover);transform:translateY(-2px);border-color:var(--glass-border)}
+.detail-icon{font-size:1.4rem;flex-shrink:0}
+.detail-info{display:flex;flex-direction:column;gap:2px}
+.detail-label{font-size:0.75rem;color:var(--text-secondary);font-weight:400;text-transform:uppercase;letter-spacing:0.8px}
+.detail-value{font-size:1.05rem;font-weight:600}
+
+.aqi-section{margin-top:24px;padding-top:24px;border-top:1px solid var(--glass-border)}
+.aqi-title{font-size:1rem;font-weight:500;margin-bottom:14px}
+.aqi-bar-container{display:flex;align-items:center;gap:14px}
+.aqi-bar{flex:1;height:10px;background:rgba(255,255,255,0.08);border-radius:50px;overflow:hidden}
+.aqi-fill{height:100%;border-radius:50px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1),background 0.6s ease;width:0%}
+.aqi-label{font-size:0.85rem;font-weight:500;white-space:nowrap;min-width:60px;text-align:right}
+
+.app-footer{position:relative;z-index:1;padding:20px;text-align:center;width:100%}
+.app-footer p{font-size:0.8rem;color:var(--text-secondary);font-weight:300}
+.app-footer a{color:var(--accent-blue);text-decoration:none;transition:var(--transition)}
+.app-footer a:hover{color:var(--accent-purple)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hidden{display:none !important}
+
+@media(max-width:480px){
+  .app-title{font-size:1.8rem}
+  .temp-value{font-size:4rem}
+  .weather-card{padding:24px 18px}
+  .details-grid{gap:8px}
+  .detail-card{padding:12px}
+  .weather-icon{width:64px;height:64px}
+  .city-name{font-size:1.4rem}
+}
